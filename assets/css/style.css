@@ -1,0 +1,20 @@
+.whole {
+    background-color: burlywood;
+}
+
+.jumbotron {
+    background-color: darkblue;
+}
+
+.page-title {
+    text-align: center;
+    color: white;
+}
+
+#current-train-schedule, #add-train {
+    width: 75vw;
+    text-align: center;
+    color: darkblue;
+    font-weight: bolder;
+    font-size: 120%;
+}

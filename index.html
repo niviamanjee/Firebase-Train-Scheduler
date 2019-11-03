@@ -12,19 +12,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="jumbotron jumbotron-fluid">
+    <div class="container whole">
+        <div class="jumbotron jumbotron-fluid" style="background-color: darkblue">
             <div class="container">
-                <h1 class="display-4">Firebase Train Scheduler</h1>
-                <p class="lead"> *short sentence for purpose/guiding user*
-                </p>
+                <h1 class="display-4 page-title">Firebase Train Scheduler</h1>
             </div>
         </div>
         <table class="table">
-            <label> Current Train Schedule </label>
+            <label id="current-train-schedule"> Current Train Schedule </label>
             <thead id="table-titles">
                 <tr>
                     <th scope="col"> Train Name </th>
@@ -35,46 +36,12 @@
                 </tr>
             </thead>
             <tbody id="table-entries">
-                <tr>
-                    <td class="trainName">train name</td>>
-                    <td class=>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>train name</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td></td>>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <td></td>>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                </tr>
+
             </tbody>
         </table>
         <form>
             <div class="form-group title">
-                <label> Add Train </label>
+                <label id="add-train"> Add Train </label>
             </div>
             <div class="form-group">
                 <label>Train Name </label>
@@ -85,14 +52,15 @@
                 <input class="form-control" id="destinationInput">
             </div>
             <div class="form-group">
-                <label> First Train Time (HH:mm military time)</label>
+                <label> First Train Time (am/pm)</label>
                 <input class="form-control" id="trainTimeInput">
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="form-group">
+                <label> Frequency (min) </label>
+                <input class="form-control" id="frequencyInput">
+
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="submit-button" type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
     <script src="../Firebase-Train-Scheduler/assets/javascript/logic.js"></script>
