@@ -31,7 +31,7 @@ $("#submit-button").on("click", function (event) {
 
     var trainName = $("#trainNameInput").val().trim();
     var trainDestination = $("#destinationInput").val().trim();
-    var trainTime = ("#trainTimeInput").val().trim();
+    var trainTime = $("#trainTimeInput").val().trim();
     var frequency = $("#frequencyInput").val().trim();
 
     var trainTimeConverted = moment(trainTime, "hh:mm a").format("HH:mm");
@@ -41,7 +41,7 @@ $("#submit-button").on("click", function (event) {
     var newTrain = {
         name: trainName,
         destination: trainDestination,
-        time: trainTimeConverted,
+        time: trainTime,
         trainFrequency: frequency
     };
 
@@ -75,11 +75,20 @@ database.ref().on("child_added", function (childSnapshot) {
 
 
 
-    var trainTimeConverted = moment(trainTime, "hh:mm a").format("HH:mm");
+    var trainTimeConverted = moment(trainTime, "HH:mm").subtract(1, "years");
 
-    var nextArrival = moment(trainTimeConverted).add({ minutes: frequency }).format("hh:mm A");
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-    // var minutesAway =
+    var diffTime = moment().diff(moment(trainTimeConverted), "minutes");
+    var remainder = diffTime % frequency;
+
+    var minTillTrain = frequency - remainder;
+
+    var nextArrival = moment(currentTime).add(frequency, "minutes");
+
+    var nextArrFmt = moment(nextArrival).format("hh:mm A")
+
 
 
 
@@ -88,9 +97,9 @@ database.ref().on("child_added", function (childSnapshot) {
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(trainDestination),
-        $("<td>").text(frequency),
-        $("<td>").text(nextArrival),
-        // $("<td>").text(minutesAway),
+        $("<td>").text(frequency + "min"),
+        $("<td>").text(nextArrFmt),
+        $("<td>").text(minTillTrain + "min"),
     );
 
     // Append the new row to the table
